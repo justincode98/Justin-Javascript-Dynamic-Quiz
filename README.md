@@ -16,4 +16,8 @@ After running index.html, clicking on the "Start Quiz" button should launch the 
 Answering the prompts generates a password that conforms to the answers given in the prompts.
 
 ## Known Issues
-many
+styling
+timer
+high score storage
+view high scores
+listener events
