@@ -114,10 +114,20 @@ function buttonListener(event) {
     if(targetE1.matches("#btn-4")) {
         console.log("hit 4");
         clickedAnswer(answerArray[questionCount] === "4");
-    }
+    }//applies only to start page
     if(targetE1.matches("#start-quiz")){
         console.log("start the quiz");
         clickedAnswer(true);
+    }//next only applies to end pages
+    if(targetE1.matches("#clear-high-score"))
+    {
+        localStorage.clear();
+    }
+    if(targetE1.matches("#go-back")) //reset to the beginning
+    {
+        clearPageMain();
+        questionCount = -1;
+        createStartPage();
     }
 }
 
@@ -140,11 +150,43 @@ function clickedAnswer(buttonResult) {
         createGenericQuestionPage(questionCount);
     }
     else {
+        createEndPage(); 
         //go to endpage
     }
     console.log("score is now " + score);
 
 }
+
+
+function createEndPage() {
+    //edits the area for the text
+    //note that getElementsByClassName returns an array of all elements withe corresponding class, hence the need for [0]
+    //also no need for period in the parameter
+    let textAreaSelection = document.getElementsByClassName("question-text-area"); //"Try to answer the following code-related questiosn within the time limit. Keep in mind the incorrect answers will penalize your score/time by ten seconds!";
+    let temp = localStorage.getItem("temp name");
+    textAreaSelection[0].innerHTML = "here are high scores" + temp;
+    
+
+    
+    //creates a start button wrapped in a div with class temp container that will be deleted later
+    let buttonAreaSelectE1 = document.querySelector(".button-area");
+    let tempContainerDivE1 = document.createElement("div");
+    tempContainerDivE1.className = "temp-container";
+
+    let genericButton = createBtn("Go Back");
+    genericButton.setAttribute("id", "go-back");
+    tempContainerDivE1.appendChild(genericButton);
+
+    genericButton = createBtn("clear high scores");
+    genericButton.setAttribute("id", "clear-high-score");
+    tempContainerDivE1.appendChild(genericButton);
+    buttonAreaSelectE1.appendChild(tempContainerDivE1);
+    localStorage.setItem("temp name", score);
+
+
+}
+
+
 //run all needed functions
 
 //temp test variable both start at -1 for iterative purposes
