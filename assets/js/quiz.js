@@ -123,10 +123,15 @@ function buttonListener(event) {
 
 //allows progression to the next question as well
 function clickedAnswer(buttonResult) {
+    let footerAreaSelection = document.getElementsByClassName("result-prev-ans");
     if(buttonResult) {
         score++;//replace with timer later
         //also edits footer
-        
+         //"Try to answer the following code-related questiosn within the time limit. Keep in mind the incorrect answers will penalize your score/time by ten seconds!";
+        footerAreaSelection[0].textContent = "Correct!";
+    }
+    else {
+        footerAreaSelection[0].textContent = "Wrong!";
     }
 
     questionCount++;
